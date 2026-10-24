@@ -1,0 +1,8 @@
+# Dependencias (se reinstalan con npm install)
+node_modules/
+
+# Secretos
+.env
+
+# Archivos generados por Vite al compilar
+dist/
