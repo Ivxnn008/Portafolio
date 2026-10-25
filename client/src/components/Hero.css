@@ -114,8 +114,9 @@
   }
 
   .hero-rol {
-    top: 50%;
-    transform: translateY(-50%);
+    top: auto;
+    bottom: 0;
+    transform: translateY(25%);
     font-size: 1.5rem;
   }
 }

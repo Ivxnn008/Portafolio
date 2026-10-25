@@ -11,7 +11,7 @@ function Hero() {
           </div>
 
           <p className="hero-descripcion">
-            Soy un desarrollador web, videcoder junior con mas de 1 año de experiencía en el mundo del desarrollo. Manejo más de 4 lenguajes de programación, especializandome más en el Frontend y en la expriencia de usuario.
+            Soy un desarrollador web, vibecoder junior con más de 1 año de experiencia en el mundo del desarrollo. Manejo más de 4 lenguajes de programación, especializándome más en el Frontend y en la experiencia de usuario.
           </p>
 
           <div className="hero-botones">
