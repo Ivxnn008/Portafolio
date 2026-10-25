@@ -2,37 +2,15 @@ import express from "express";
 import cors from "cors";
 import dotenv from "dotenv";
 import mongoose from "mongoose";
+import Proyecto from "./models/Proyecto.js";
+import rutasLogin from "./routes/login.js";
+import rutasProyectos from "./routes/proyectos.js";
+import rutasMensajes from "./routes/mensajes.js";
 
 dotenv.config();
 
 const app = express();
 const PORT = process.env.PORT || 4000;
-
-const proyectoSchema = new mongoose.Schema(
-  {
-    titulo: { type: String, required: true },
-    descripcion: { type: String, required: true },
-    tecnologias: { type: [String], default: [] },
-    imagen: { type: String, default: "" },
-    demo: { type: String, default: "" },
-    codigo: { type: String, default: "" },
-  },
-  { versionKey: false }
-);
-
-const Proyecto = mongoose.model("Proyecto", proyectoSchema);
-
-const mensajeSchema = new mongoose.Schema(
-  {
-    nombre: { type: String, required: true },
-    email: { type: String, required: true },
-    mensaje: { type: String, required: true },
-    fecha: { type: Date, default: Date.now },
-  },
-  { versionKey: false }
-);
-
-const Mensaje = mongoose.model("Mensaje", mensajeSchema);
 
 const proyectosDeEjemplo = [
   {
@@ -62,6 +40,8 @@ async function cargarProyectosDeEjemplo() {
   }
 }
 
+mongoose.set("sanitizeFilter", true);
+
 mongoose
   .connect(process.env.MONGO_URI)
   .then(() => {
@@ -72,79 +52,26 @@ mongoose
 
 app.use(cors());
 
-app.use(express.json());
+app.use(express.json({ limit: "10kb" }));
 
 app.get("/api/prueba", (req, res) => {
   res.json({ mensaje: "¡La API del portafolio funciona!" });
 });
 
-function verificarPin(req, res, next) {
-  const pin = req.headers["x-admin-pin"];
+app.use("/api/login", rutasLogin);
+app.use("/api/proyectos", rutasProyectos);
+app.use("/api/mensajes", rutasMensajes);
 
-  if (!process.env.ADMIN_PIN || pin !== process.env.ADMIN_PIN) {
-    return res.status(401).json({ error: "PIN incorrecto" });
+app.use((error, req, res, next) => {
+  const estado = error.status || 500;
+
+  if (estado === 500) {
+    console.log("❌ Error en la API:", error.message);
   }
 
-  next();
-}
-
-function validarId(req, res, next) {
-  if (!mongoose.isObjectIdOrHexString(req.params.id)) {
-    return res.status(404).json({ error: "Proyecto no encontrado" });
-  }
-
-  next();
-}
-
-app.post("/api/login", verificarPin, (req, res) => {
-  res.json({ mensaje: "Bienvenido, administrador" });
-});
-
-app.get("/api/proyectos", async (req, res) => {
-  const lista = await Proyecto.find();
-  res.json(lista);
-});
-
-app.post("/api/proyectos", verificarPin, async (req, res) => {
-  const { titulo, descripcion, tecnologias = [], imagen = "", demo = "", codigo = "" } = req.body;
-  const nuevo = await Proyecto.create({ titulo, descripcion, tecnologias, imagen, demo, codigo });
-  res.status(201).json(nuevo);
-});
-
-app.put("/api/proyectos/:id", verificarPin, validarId, async (req, res) => {
-  const { titulo, descripcion, tecnologias = [], imagen = "", demo = "", codigo = "" } = req.body;
-  const actualizado = await Proyecto.findByIdAndUpdate(
-    req.params.id,
-    { titulo, descripcion, tecnologias, imagen, demo, codigo },
-    { returnDocument: "after", runValidators: true }
-  );
-
-  if (!actualizado) {
-    return res.status(404).json({ error: "Proyecto no encontrado" });
-  }
-
-  res.json(actualizado);
-});
-
-app.delete("/api/proyectos/:id", verificarPin, validarId, async (req, res) => {
-  const borrado = await Proyecto.findByIdAndDelete(req.params.id);
-
-  if (!borrado) {
-    return res.status(404).json({ error: "Proyecto no encontrado" });
-  }
-
-  res.json({ mensaje: "Proyecto borrado" });
-});
-
-app.post("/api/mensajes", async (req, res) => {
-  const { nombre, email, mensaje } = req.body;
-  const nuevo = await Mensaje.create({ nombre, email, mensaje });
-  res.status(201).json(nuevo);
-});
-
-app.get("/api/mensajes", verificarPin, async (req, res) => {
-  const lista = await Mensaje.find().sort({ fecha: 1 });
-  res.json(lista);
+  res.status(estado).json({
+    error: estado === 500 ? "Error del servidor" : "La petición no es válida",
+  });
 });
 
 app.listen(PORT, () => {

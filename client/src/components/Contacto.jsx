@@ -20,6 +20,10 @@ function Contacto() {
       body: JSON.stringify({ nombre, email, mensaje }),
     })
       .then((respuesta) => {
+        if (respuesta.status === 429) {
+          setEstado("demasiados-mensajes");
+          return;
+        }
         if (!respuesta.ok) {
           throw new Error("La API respondió con un error");
         }
@@ -89,6 +93,12 @@ function Contacto() {
           {estado === "exito" && (
             <p className="contacto-aviso contacto-aviso-exito" role="status">
               ¡Gracias! Tu mensaje se envió correctamente.
+            </p>
+          )}
+
+          {estado === "demasiados-mensajes" && (
+            <p className="contacto-aviso contacto-aviso-error" role="alert">
+              Ya enviaste varios mensajes. Espera 15 minutos antes de enviar otro.
             </p>
           )}
 

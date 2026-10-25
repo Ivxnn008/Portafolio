@@ -27,6 +27,8 @@ function LoginAdmin({ onEntrar, onCerrar }) {
       .then((respuesta) => {
         if (respuesta.ok) {
           onEntrar(pin);
+        } else if (respuesta.status === 429) {
+          setEstado("demasiados-intentos");
         } else {
           setEstado("pin-incorrecto");
         }
@@ -59,6 +61,12 @@ function LoginAdmin({ onEntrar, onCerrar }) {
         {estado === "pin-incorrecto" && (
           <p className="login-error" role="alert">
             PIN incorrecto. Inténtalo de nuevo.
+          </p>
+        )}
+
+        {estado === "demasiados-intentos" && (
+          <p className="login-error" role="alert">
+            Demasiados intentos. Espera 15 minutos antes de volver a probar.
           </p>
         )}
 
