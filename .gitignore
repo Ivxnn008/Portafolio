@@ -6,3 +6,5 @@ node_modules/
 
 # Archivos generados por Vite al compilar
 dist/
+
+CLAUDE.md
