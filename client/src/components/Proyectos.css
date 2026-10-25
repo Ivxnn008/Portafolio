@@ -1,0 +1,137 @@
+.proyectos {
+  padding: 80px 24px;
+}
+
+.proyectos-contenido {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.proyectos-titulo {
+  margin: 0 0 8px;
+  font-size: 2.5rem;
+}
+
+.proyectos-subtitulo {
+  margin: 0 0 40px;
+  color: var(--color-texto-secundario);
+}
+
+.proyectos-mensaje {
+  color: var(--color-texto-secundario);
+}
+
+.proyectos-grilla {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 320px), 1fr));
+  gap: 24px;
+}
+
+.proyecto-tarjeta {
+  display: flex;
+  flex-direction: column;
+  background-color: var(--color-tarjeta);
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+.proyecto-imagen {
+  width: 100%;
+  height: auto;
+  aspect-ratio: 16 / 9;
+  object-fit: cover;
+  background-color: var(--color-foto);
+}
+
+.proyecto-cuerpo {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+  gap: 12px;
+  padding: 20px;
+}
+
+.proyecto-titulo {
+  margin: 0;
+  font-size: 1.25rem;
+}
+
+.proyecto-descripcion {
+  margin: 0;
+  color: var(--color-texto-secundario);
+}
+
+.proyecto-tecnologias {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.proyecto-etiqueta {
+  padding: 4px 10px;
+  border-radius: 999px;
+  background-color: rgba(94, 234, 212, 0.1);
+  color: var(--color-acento);
+  font-size: 0.8125rem;
+  font-weight: 600;
+}
+
+.proyecto-botones {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: auto;
+  padding-top: 8px;
+}
+
+.proyecto-boton {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  padding: 8px 18px;
+  border: 2px solid var(--color-acento);
+  border-radius: 8px;
+  font-size: 0.9375rem;
+  font-weight: 600;
+  text-decoration: none;
+  transition: transform 160ms ease-out, opacity 160ms ease-out;
+}
+
+.proyecto-boton-relleno {
+  background-color: var(--color-acento);
+  color: var(--color-texto-acento);
+}
+
+.proyecto-boton-relleno:hover {
+  opacity: 0.9;
+}
+
+.proyecto-boton-borde {
+  color: var(--color-acento);
+}
+
+.proyecto-boton-borde:hover {
+  background-color: rgba(94, 234, 212, 0.1);
+}
+
+.proyecto-boton:active {
+  transform: scale(0.97);
+}
+
+.proyecto-boton:focus-visible {
+  outline: 2px solid var(--color-acento);
+  outline-offset: 3px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .proyecto-boton {
+    transition: none;
+  }
+
+  .proyecto-boton:active {
+    transform: none;
+  }
+}

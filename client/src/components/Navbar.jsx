@@ -26,9 +26,6 @@ function Navbar() {
             <a href="#acerca-de-mi" className="navbar-enlace">Acerca de mí</a>
           </li>
           <li>
-            <a href="#hobbies" className="navbar-enlace">Hobbies</a>
-          </li>
-          <li>
             <a href="#contacto" className="navbar-enlace">Contacto</a>
           </li>
         </ul>

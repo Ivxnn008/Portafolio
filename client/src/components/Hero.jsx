@@ -1,0 +1,41 @@
+import "./Hero.css";
+
+function Hero() {
+  return (
+    <section id="inicio" className="hero">
+      <div className="hero-contenido">
+        <div className="hero-texto">
+          <div className="hero-titulos">
+            <h1 className="hero-nombre">Ivan Garcia</h1>
+            <p className="hero-rol">Desarrollador Frontend</p>
+          </div>
+
+          <p className="hero-descripcion">
+            Soy un desarrollador web, videcoder junior con mas de 1 año de experiencía en el mundo del desarrollo. Manejo más de 4 lenguajes de programación, especializandome más en el Frontend y en la expriencia de usuario.
+          </p>
+
+          <div className="hero-botones">
+            <a href="#proyectos" className="hero-boton hero-boton-borde">
+              Ver proyectos
+            </a>
+            <a href="#contacto" className="hero-boton hero-boton-relleno">
+              Contactar
+            </a>
+          </div>
+        </div>
+
+        <div className="hero-foto-columna">
+          <img
+            src="/foto-recortada.png"
+            alt="Foto de Ivan Garcia"
+            className="hero-foto"
+            width="360"
+            height="480"
+          />
+        </div>
+      </div>
+    </section>
+  );
+}
+
+export default Hero;

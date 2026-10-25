@@ -1,0 +1,70 @@
+.acerca {
+  padding: 80px 24px;
+}
+
+.acerca-contenido {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.acerca-titulo {
+  margin: 0 0 40px;
+  font-size: 2.5rem;
+}
+
+.acerca-columnas {
+  display: grid;
+  grid-template-columns: minmax(0, 3fr) minmax(0, 2fr);
+  align-items: start;
+  gap: 48px;
+}
+
+.acerca-texto {
+  max-width: 65ch;
+  font-size: 1.125rem;
+  color: var(--color-texto-secundario);
+}
+
+.acerca-texto p {
+  margin: 0 0 16px;
+}
+
+.acerca-tarjeta {
+  padding: 24px;
+  border-radius: 12px;
+  background-color: var(--color-tarjeta);
+}
+
+.acerca-subtitulo {
+  margin: 0 0 16px;
+  font-size: 1.25rem;
+}
+
+.acerca-tecnologias {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.acerca-etiqueta {
+  padding: 6px 12px;
+  border-radius: 999px;
+  background-color: rgba(94, 234, 212, 0.1);
+  color: var(--color-acento);
+  font-size: 0.875rem;
+  font-weight: 600;
+}
+
+@media (max-width: 768px) {
+  .acerca {
+    padding: 56px 24px;
+  }
+
+  .acerca-columnas {
+    grid-template-columns: 1fr;
+    gap: 32px;
+  }
+}

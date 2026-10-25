@@ -1,13 +1,21 @@
 import Navbar from "./components/Navbar.jsx";
+import Hero from "./components/Hero.jsx";
+import Proyectos from "./components/Proyectos.jsx";
+import AcercaDeMi from "./components/AcercaDeMi.jsx";
+import Contacto from "./components/Contacto.jsx";
+import Footer from "./components/Footer.jsx";
 
 function App() {
   return (
     <>
       <Navbar />
       <main>
-        <h1>Ivan Garcia</h1>
-        <p>Desarrollador Frontend</p>
+        <Hero />
+        <Proyectos />
+        <AcercaDeMi />
+        <Contacto />
       </main>
+      <Footer />
     </>
   );
 }

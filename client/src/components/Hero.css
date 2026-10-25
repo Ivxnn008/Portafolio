@@ -1,0 +1,155 @@
+.hero {
+  background-color: var(--color-fondo);
+  padding: 80px 24px;
+  overflow: hidden;
+}
+
+.hero-texto {
+  position: relative;
+  z-index: 0;
+}
+
+.hero-contenido {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  align-items: center;
+  gap: 48px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.hero-titulos {
+  position: relative;
+}
+
+.hero-nombre {
+  margin: 0;
+  font-size: 10rem;
+  font-weight: 800;
+  line-height: 0.95;
+  white-space: nowrap;
+  color: var(--color-foto);
+}
+
+.hero-rol {
+  position: absolute;
+  left: 0;
+  top: 65%;
+  margin: 0;
+  font-size: 2.25rem;
+  font-weight: 700;
+  color: var(--color-acento);
+}
+
+.hero-descripcion {
+  max-width: 48ch;
+  margin: 32px 0;
+  font-size: 1.125rem;
+  color: var(--color-texto-secundario);
+}
+
+.hero-botones {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+}
+
+.hero-boton {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  padding: 10px 24px;
+  border: 2px solid var(--color-acento);
+  border-radius: 8px;
+  font-weight: 600;
+  text-decoration: none;
+  transition: transform 160ms ease-out, opacity 160ms ease-out;
+}
+
+.hero-boton-borde {
+  color: var(--color-acento);
+}
+
+.hero-boton-borde:hover {
+  background-color: rgba(94, 234, 212, 0.1);
+}
+
+.hero-boton-relleno {
+  background-color: var(--color-acento);
+  color: var(--color-texto-acento);
+}
+
+.hero-boton-relleno:hover {
+  opacity: 0.9;
+}
+
+.hero-boton:active {
+  transform: scale(0.97);
+}
+
+.hero-boton:focus-visible {
+  outline: 2px solid var(--color-acento);
+  outline-offset: 3px;
+}
+
+.hero-foto-columna {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  justify-content: flex-end;
+  margin-right: 80px;
+}
+
+.hero-foto {
+  width: 360px;
+  height: auto;
+  -webkit-mask-image: linear-gradient(to bottom, black 80%, transparent);
+  mask-image: linear-gradient(to bottom, black 80%, transparent);
+}
+
+@media (max-width: 1024px) {
+  .hero-nombre {
+    font-size: 7rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .hero {
+    padding: 48px 24px;
+  }
+
+  .hero-contenido {
+    grid-template-columns: 1fr;
+    gap: 40px;
+  }
+
+  .hero-nombre {
+    font-size: 3.5rem;
+    white-space: normal;
+  }
+
+  .hero-rol {
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 1.5rem;
+  }
+
+  .hero-foto-columna {
+    justify-content: center;
+    margin-right: 0;
+  }
+
+  .hero-foto {
+    width: 260px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-boton {
+    transition: none;
+  }
+
+  .hero-boton:active {
+    transform: none;
+  }
+}
