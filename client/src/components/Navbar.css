@@ -1,0 +1,79 @@
+.navbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 16px;
+  padding: 12px 24px;
+  background-color: var(--color-navbar);
+}
+
+.navbar-marca {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  text-decoration: none;
+  border-radius: 8px;
+}
+
+.navbar-foto {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%; 
+  object-fit: cover; 
+  background-color: var(--color-foto);
+}
+
+.navbar-nombre {
+  font-size: 1.125rem;
+  font-weight: 700;
+}
+
+.navbar-enlaces {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.navbar-enlace {
+  position: relative; 
+  display: inline-block;
+  padding: 8px 12px; 
+  text-decoration: none;
+  border-radius: 6px;
+}
+
+.navbar-enlace::after {
+  content: "";
+  position: absolute;
+  left: 12px;
+  right: 12px;
+  bottom: 4px;
+  height: 2px;
+  background-color: var(--color-acento);
+  transform: scaleX(0);
+  transition: transform 200ms ease-out;
+}
+
+.navbar-enlace:hover {
+  color: var(--color-acento);
+}
+
+.navbar-enlace:hover::after {
+  transform: scaleX(1);
+}
+
+.navbar-marca:focus-visible,
+.navbar-enlace:focus-visible {
+  outline: 2px solid var(--color-acento);
+  outline-offset: 2px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .navbar-enlace::after {
+    transition: none;
+  }
+}
