@@ -1,0 +1,69 @@
+.barra-admin {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 8px 24px;
+  background-color: var(--color-acento);
+  color: var(--color-texto-acento);
+}
+
+.barra-admin-texto {
+  margin: 0;
+  font-weight: 700;
+}
+
+.barra-admin-acciones {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.barra-admin-enlace {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  color: var(--color-texto-acento);
+  font-weight: 700;
+}
+
+.barra-admin-enlace:focus-visible {
+  outline: 2px solid var(--color-texto-acento);
+  outline-offset: 3px;
+}
+
+.barra-admin-boton {
+  min-height: 44px;
+  padding: 8px 20px;
+  border: 2px solid var(--color-texto-acento);
+  border-radius: 8px;
+  background-color: transparent;
+  color: var(--color-texto-acento);
+  font: inherit;
+  font-weight: 700;
+  cursor: pointer;
+  transition: transform 160ms ease-out;
+}
+
+.barra-admin-boton:hover {
+  background-color: rgba(15, 43, 40, 0.1);
+}
+
+.barra-admin-boton:active {
+  transform: scale(0.97);
+}
+
+.barra-admin-boton:focus-visible {
+  outline: 2px solid var(--color-texto-acento);
+  outline-offset: 3px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .barra-admin-boton {
+    transition: none;
+  }
+
+  .barra-admin-boton:active {
+    transform: none;
+  }
+}

@@ -126,12 +126,115 @@
   outline-offset: 3px;
 }
 
+.proyectos-boton-agregar {
+  min-height: 44px;
+  margin-bottom: 24px;
+  padding: 10px 24px;
+  border: 2px solid var(--color-acento);
+  border-radius: 8px;
+  background-color: var(--color-acento);
+  color: var(--color-texto-acento);
+  font: inherit;
+  font-weight: 600;
+  cursor: pointer;
+  transition: transform 160ms ease-out, opacity 160ms ease-out;
+}
+
+.proyectos-boton-agregar:hover {
+  opacity: 0.9;
+}
+
+.proyectos-boton-agregar:active {
+  transform: scale(0.97);
+}
+
+.proyectos-boton-agregar:focus-visible {
+  outline: 2px solid var(--color-acento);
+  outline-offset: 3px;
+}
+
+.proyectos-error-admin {
+  margin: 0 0 24px;
+  padding: 12px 16px;
+  border-radius: 8px;
+  background-color: rgba(248, 113, 113, 0.12);
+  color: #fca5a5;
+}
+
+.proyecto-admin {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  padding-top: 16px;
+  border-top: 1px solid var(--color-foto);
+}
+
+.proyecto-boton-editar {
+  min-height: 44px;
+  padding: 8px 18px;
+  border: 2px solid var(--color-acento);
+  border-radius: 8px;
+  background-color: transparent;
+  color: var(--color-acento);
+  font: inherit;
+  font-size: 0.9375rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: transform 160ms ease-out;
+}
+
+.proyecto-boton-editar:hover {
+  background-color: rgba(94, 234, 212, 0.1);
+}
+
+.proyecto-boton-editar:active {
+  transform: scale(0.97);
+}
+
+.proyecto-boton-editar:focus-visible {
+  outline: 2px solid var(--color-acento);
+  outline-offset: 3px;
+}
+
+.proyecto-boton-borrar {
+  min-height: 44px;
+  padding: 8px 18px;
+  border: 2px solid #f87171;
+  border-radius: 8px;
+  background-color: transparent;
+  color: #fca5a5;
+  font: inherit;
+  font-size: 0.9375rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: transform 160ms ease-out;
+}
+
+.proyecto-boton-borrar:hover {
+  background-color: rgba(248, 113, 113, 0.12);
+}
+
+.proyecto-boton-borrar:active {
+  transform: scale(0.97);
+}
+
+.proyecto-boton-borrar:focus-visible {
+  outline: 2px solid #fca5a5;
+  outline-offset: 3px;
+}
+
 @media (prefers-reduced-motion: reduce) {
-  .proyecto-boton {
+  .proyecto-boton,
+  .proyecto-boton-editar,
+  .proyecto-boton-borrar,
+  .proyectos-boton-agregar {
     transition: none;
   }
 
-  .proyecto-boton:active {
+  .proyecto-boton:active,
+  .proyecto-boton-editar:active,
+  .proyecto-boton-borrar:active,
+  .proyectos-boton-agregar:active {
     transform: none;
   }
 }

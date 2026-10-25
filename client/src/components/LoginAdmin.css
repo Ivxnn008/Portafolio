@@ -1,0 +1,133 @@
+.login {
+  width: min(90vw, 380px);
+  padding: 32px;
+  border: 1px solid var(--color-foto);
+  border-radius: 12px;
+  background-color: var(--color-tarjeta);
+  color: var(--color-texto);
+}
+
+.login[open] {
+  animation: login-aparecer 200ms ease-out;
+}
+
+@keyframes login-aparecer {
+  from {
+    opacity: 0;
+    transform: scale(0.96);
+  }
+}
+
+.login::backdrop {
+  background-color: rgba(15, 23, 42, 0.7);
+}
+
+.login-formulario {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.login-titulo {
+  margin: 0;
+  font-size: 1.5rem;
+}
+
+.login-campo {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.login-campo label {
+  font-weight: 600;
+}
+
+.login-campo input {
+  min-height: 44px;
+  padding: 10px 14px;
+  border: 1px solid var(--color-foto);
+  border-radius: 8px;
+  background-color: var(--color-fondo);
+  color: var(--color-texto);
+  font: inherit;
+  font-size: 1rem;
+}
+
+.login-campo input:focus {
+  border-color: var(--color-acento);
+  outline: 2px solid var(--color-acento);
+  outline-offset: 1px;
+}
+
+.login-error {
+  margin: 0;
+  padding: 12px 16px;
+  border-radius: 8px;
+  background-color: rgba(248, 113, 113, 0.12);
+  color: #fca5a5;
+}
+
+.login-botones {
+  display: flex;
+  justify-content: flex-end;
+  gap: 12px;
+}
+
+.login-boton {
+  min-height: 44px;
+  padding: 10px 20px;
+  border: 2px solid var(--color-acento);
+  border-radius: 8px;
+  font: inherit;
+  font-weight: 600;
+  cursor: pointer;
+  transition: transform 160ms ease-out, opacity 160ms ease-out;
+}
+
+.login-boton-borde {
+  background-color: transparent;
+  color: var(--color-acento);
+}
+
+.login-boton-borde:hover {
+  background-color: rgba(94, 234, 212, 0.1);
+}
+
+.login-boton-relleno {
+  background-color: var(--color-acento);
+  color: var(--color-texto-acento);
+}
+
+.login-boton-relleno:hover {
+  opacity: 0.9;
+}
+
+.login-boton:active {
+  transform: scale(0.97);
+}
+
+.login-boton:focus-visible {
+  outline: 2px solid var(--color-acento);
+  outline-offset: 3px;
+}
+
+.login-boton:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  transform: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .login[open] {
+    animation: none;
+  }
+
+  .login-boton {
+    transition: none;
+  }
+
+  .login-boton:active {
+    transform: none;
+  }
+}

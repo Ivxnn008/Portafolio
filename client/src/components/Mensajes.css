@@ -1,0 +1,134 @@
+.mensajes {
+  padding: 64px 24px;
+  border-top: 4px solid var(--color-acento);
+  background-color: var(--color-navbar);
+}
+
+.mensajes-contenido {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.mensajes-encabezado {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+.mensajes-titulo {
+  margin: 0;
+  font-size: 2rem;
+}
+
+.mensajes-privado {
+  margin: 8px 0 32px;
+  color: var(--color-texto-secundario);
+}
+
+.mensajes-boton {
+  min-height: 44px;
+  padding: 8px 20px;
+  border: 2px solid var(--color-acento);
+  border-radius: 8px;
+  background-color: transparent;
+  color: var(--color-acento);
+  font: inherit;
+  font-weight: 600;
+  cursor: pointer;
+  transition: transform 160ms ease-out;
+}
+
+.mensajes-boton:hover {
+  background-color: rgba(94, 234, 212, 0.1);
+}
+
+.mensajes-boton:active {
+  transform: scale(0.97);
+}
+
+.mensajes-boton:focus-visible {
+  outline: 2px solid var(--color-acento);
+  outline-offset: 3px;
+}
+
+.mensajes-boton:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  transform: none;
+}
+
+.mensajes-error {
+  padding: 12px 16px;
+  border-radius: 8px;
+  background-color: rgba(248, 113, 113, 0.12);
+  color: #fca5a5;
+}
+
+.mensajes-vacio {
+  color: var(--color-texto-secundario);
+}
+
+.mensajes-lista {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.mensaje {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  padding: 20px 24px;
+  border-radius: 12px;
+  background-color: var(--color-tarjeta);
+}
+
+.mensaje-cabecera {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+.mensaje-nombre {
+  margin: 0;
+  font-weight: 700;
+}
+
+.mensaje-fecha {
+  color: var(--color-texto-secundario);
+  font-size: 0.875rem;
+}
+
+.mensaje-email {
+  align-self: flex-start;
+  color: var(--color-acento);
+  overflow-wrap: anywhere;
+}
+
+.mensaje-email:focus-visible {
+  outline: 2px solid var(--color-acento);
+  outline-offset: 2px;
+}
+
+.mensaje-texto {
+  margin: 8px 0 0;
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .mensajes-boton {
+    transition: none;
+  }
+
+  .mensajes-boton:active {
+    transform: none;
+  }
+}

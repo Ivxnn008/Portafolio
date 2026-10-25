@@ -1,11 +1,11 @@
 import "./Footer.css";
 
 const GITHUB_URL = "https://github.com/Ivxnn008";
-const CORREO = "tu-correo@ejemplo.com";
+const CORREO = "ivangar.1904@gmail.com";
 
 const anioActual = new Date().getFullYear();
 
-function Footer() {
+function Footer({ onAbrirLogin }) {
   return (
     <footer className="footer">
       <div className="footer-contenido">
@@ -67,7 +67,31 @@ function Footer() {
         </div>
       </div>
 
-      <p className="footer-copy">© {anioActual} Ivan Garcia. Todos los derechos reservados.</p>
+      <div className="footer-abajo">
+        <p className="footer-copy">© {anioActual} Ivan Garcia. Todos los derechos reservados.</p>
+
+        <button
+          type="button"
+          className="footer-candado"
+          onClick={onAbrirLogin}
+          aria-label="Entrar al modo administrador"
+        >
+          <svg
+            viewBox="0 0 24 24"
+            width="16"
+            height="16"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="2"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            aria-hidden="true"
+          >
+            <rect x="3" y="11" width="18" height="11" rx="2" />
+            <path d="M7 11V7a5 5 0 0 1 10 0v4" />
+          </svg>
+        </button>
+      </div>
     </footer>
   );
 }
