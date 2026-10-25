@@ -1,16 +1,23 @@
+import { useState, useEffect } from "react";
 import "./Navbar.css";
 
 function Navbar() {
+  const [paginaBajo, setPaginaBajo] = useState(false);
+
+  useEffect(() => {
+    function revisarScroll() {
+      setPaginaBajo(window.scrollY > 0);
+    }
+
+    revisarScroll();
+    window.addEventListener("scroll", revisarScroll, { passive: true });
+
+    return () => window.removeEventListener("scroll", revisarScroll);
+  }, []);
+
   return (
-    <header className="navbar">
+    <header className={paginaBajo ? "navbar navbar-separado" : "navbar"}>
       <a href="#inicio" className="navbar-marca">
-        <img
-          src="/foto-perfil.jpg"
-          alt="Foto de perfil de Ivan Garcia"
-          className="navbar-foto"
-          width="44"
-          height="44"
-        />
         <span className="navbar-nombre">Ivan Garcia</span>
       </a>
 

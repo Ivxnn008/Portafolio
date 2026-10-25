@@ -92,21 +92,6 @@
   outline-offset: 3px;
 }
 
-.hero-foto-columna {
-  position: relative;
-  z-index: 1;
-  display: flex;
-  justify-content: flex-end;
-  margin-right: 80px;
-}
-
-.hero-foto {
-  width: 360px;
-  height: auto;
-  -webkit-mask-image: linear-gradient(to bottom, black 80%, transparent);
-  mask-image: linear-gradient(to bottom, black 80%, transparent);
-}
-
 @media (max-width: 1024px) {
   .hero-nombre {
     font-size: 7rem;
@@ -132,15 +117,6 @@
     top: 50%;
     transform: translateY(-50%);
     font-size: 1.5rem;
-  }
-
-  .hero-foto-columna {
-    justify-content: center;
-    margin-right: 0;
-  }
-
-  .hero-foto {
-    width: 260px;
   }
 }
 

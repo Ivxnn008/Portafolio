@@ -1,4 +1,7 @@
 .navbar {
+  position: sticky;
+  top: 0;
+  z-index: 100;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -8,24 +11,30 @@
   background-color: var(--color-navbar);
 }
 
+.navbar::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-bottom: 1px solid rgba(148, 163, 184, 0.2);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 200ms ease-out;
+}
+
+.navbar-separado::after {
+  opacity: 1;
+}
+
 .navbar-marca {
   display: flex;
   align-items: center;
-  gap: 12px;
   text-decoration: none;
   border-radius: 8px;
 }
 
-.navbar-foto {
-  width: 44px;
-  height: 44px;
-  border-radius: 50%; 
-  object-fit: cover; 
-  background-color: var(--color-foto);
-}
-
 .navbar-nombre {
-  font-size: 1.125rem;
+  font-size: 1.5rem;
   font-weight: 700;
 }
 
@@ -72,7 +81,34 @@
   outline-offset: 2px;
 }
 
+@media (max-width: 600px) {
+  .navbar {
+    gap: 4px;
+    padding: 8px 12px;
+  }
+
+  .navbar nav {
+    width: 100%;
+  }
+
+  .navbar-enlaces {
+    flex-wrap: nowrap;
+    justify-content: space-between;
+  }
+
+  .navbar-enlace {
+    padding: 8px 6px;
+    font-size: 0.9375rem;
+  }
+
+  .navbar-enlace::after {
+    left: 6px;
+    right: 6px;
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
+  .navbar::after,
   .navbar-enlace::after {
     transition: none;
   }

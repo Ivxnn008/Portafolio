@@ -23,16 +23,6 @@ function Hero() {
             </a>
           </div>
         </div>
-
-        <div className="hero-foto-columna">
-          <img
-            src="/foto-recortada.png"
-            alt="Foto de Ivan Garcia"
-            className="hero-foto"
-            width="360"
-            height="480"
-          />
-        </div>
       </div>
     </section>
   );
