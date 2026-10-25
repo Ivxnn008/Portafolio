@@ -8,11 +8,6 @@ dotenv.config();
 const app = express();
 const PORT = process.env.PORT || 4000;
 
-mongoose
-  .connect(process.env.MONGO_URI)
-  .then(() => console.log("✅ Conectado a MongoDB"))
-  .catch((error) => console.log("❌ Error al conectar a MongoDB:", error.message));
-
 const proyectoSchema = new mongoose.Schema(
   {
     titulo: { type: String, required: true },
@@ -39,6 +34,42 @@ const mensajeSchema = new mongoose.Schema(
 
 const Mensaje = mongoose.model("Mensaje", mensajeSchema);
 
+const proyectosDeEjemplo = [
+  {
+    titulo: "Portafolio personal",
+    descripcion: "Mi portafolio hecho con React y una API propia en Express.",
+    tecnologias: ["React", "Vite", "Node.js", "Express"],
+    imagen: "/proyecto-portafolio.jpg",
+    demo: "",
+    codigo: "https://github.com/Ivxnn008/Portafolio",
+  },
+  {
+    titulo: "Lista de tareas",
+    descripcion: "Aplicación para agregar, completar y borrar tareas.",
+    tecnologias: ["HTML", "CSS", "JavaScript"],
+    imagen: "/proyecto-tareas.jpg",
+    demo: "",
+    codigo: "",
+  },
+];
+
+async function cargarProyectosDeEjemplo() {
+  const cantidad = await Proyecto.countDocuments();
+
+  if (cantidad === 0) {
+    await Proyecto.insertMany(proyectosDeEjemplo);
+    console.log("Proyectos de ejemplo cargados en la base de datos");
+  }
+}
+
+mongoose
+  .connect(process.env.MONGO_URI)
+  .then(() => {
+    console.log("✅ Conectado a MongoDB");
+    return cargarProyectosDeEjemplo();
+  })
+  .catch((error) => console.log("❌ Error al conectar a MongoDB:", error.message));
+
 app.use(cors());
 
 app.use(express.json());
@@ -57,88 +88,63 @@ function verificarPin(req, res, next) {
   next();
 }
 
+function validarId(req, res, next) {
+  if (!mongoose.isObjectIdOrHexString(req.params.id)) {
+    return res.status(404).json({ error: "Proyecto no encontrado" });
+  }
+
+  next();
+}
+
 app.post("/api/login", verificarPin, (req, res) => {
   res.json({ mensaje: "Bienvenido, administrador" });
 });
 
-const proyectos = [
-  {
-    _id: "1",
-    titulo: "Portafolio personal",
-    descripcion: "Mi portafolio hecho con React y una API propia en Express.",
-    tecnologias: ["React", "Vite", "Node.js", "Express"],
-    imagen: "/proyecto-portafolio.jpg",
-    demo: "",
-    codigo: "https://github.com/Ivxnn008/Portafolio",
-  },
-  {
-    _id: "2",
-    titulo: "Lista de tareas",
-    descripcion: "Aplicación para agregar, completar y borrar tareas.",
-    tecnologias: ["HTML", "CSS", "JavaScript"],
-    imagen: "/proyecto-tareas.jpg",
-    demo: "",
-    codigo: "",
-  },
-];
-
-let siguienteId = 3;
-
-app.get("/api/proyectos", (req, res) => {
-  res.json(proyectos);
+app.get("/api/proyectos", async (req, res) => {
+  const lista = await Proyecto.find();
+  res.json(lista);
 });
 
-app.post("/api/proyectos", verificarPin, (req, res) => {
+app.post("/api/proyectos", verificarPin, async (req, res) => {
   const { titulo, descripcion, tecnologias = [], imagen = "", demo = "", codigo = "" } = req.body;
-  const nuevo = { _id: String(siguienteId), titulo, descripcion, tecnologias, imagen, demo, codigo };
-  siguienteId++;
-  proyectos.push(nuevo);
+  const nuevo = await Proyecto.create({ titulo, descripcion, tecnologias, imagen, demo, codigo });
   res.status(201).json(nuevo);
 });
 
-app.put("/api/proyectos/:id", verificarPin, (req, res) => {
-  const indice = proyectos.findIndex((proyecto) => proyecto._id === req.params.id);
+app.put("/api/proyectos/:id", verificarPin, validarId, async (req, res) => {
+  const { titulo, descripcion, tecnologias = [], imagen = "", demo = "", codigo = "" } = req.body;
+  const actualizado = await Proyecto.findByIdAndUpdate(
+    req.params.id,
+    { titulo, descripcion, tecnologias, imagen, demo, codigo },
+    { returnDocument: "after", runValidators: true }
+  );
 
-  if (indice === -1) {
+  if (!actualizado) {
     return res.status(404).json({ error: "Proyecto no encontrado" });
   }
 
-  const { titulo, descripcion, tecnologias = [], imagen = "", demo = "", codigo = "" } = req.body;
-  proyectos[indice] = { _id: req.params.id, titulo, descripcion, tecnologias, imagen, demo, codigo };
-  res.json(proyectos[indice]);
+  res.json(actualizado);
 });
 
-app.delete("/api/proyectos/:id", verificarPin, (req, res) => {
-  const indice = proyectos.findIndex((proyecto) => proyecto._id === req.params.id);
+app.delete("/api/proyectos/:id", verificarPin, validarId, async (req, res) => {
+  const borrado = await Proyecto.findByIdAndDelete(req.params.id);
 
-  if (indice === -1) {
+  if (!borrado) {
     return res.status(404).json({ error: "Proyecto no encontrado" });
   }
 
-  proyectos.splice(indice, 1);
   res.json({ mensaje: "Proyecto borrado" });
 });
 
-const mensajes = [];
-
-let siguienteIdMensaje = 1;
-
-app.post("/api/mensajes", (req, res) => {
+app.post("/api/mensajes", async (req, res) => {
   const { nombre, email, mensaje } = req.body;
-  const nuevo = {
-    _id: String(siguienteIdMensaje),
-    nombre,
-    email,
-    mensaje,
-    fecha: new Date().toISOString(),
-  };
-  siguienteIdMensaje++;
-  mensajes.push(nuevo);
+  const nuevo = await Mensaje.create({ nombre, email, mensaje });
   res.status(201).json(nuevo);
 });
 
-app.get("/api/mensajes", verificarPin, (req, res) => {
-  res.json(mensajes);
+app.get("/api/mensajes", verificarPin, async (req, res) => {
+  const lista = await Mensaje.find().sort({ fecha: 1 });
+  res.json(lista);
 });
 
 app.listen(PORT, () => {
